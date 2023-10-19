@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using WhatCanICook.Application.DTOs;
+using WhatCanICook.Application.Exceptions;
 using WhatCanICook.Application.Services.Interfaces;
+using WhatCanICook.Application.Services.Validators;
 using WhatCanICook.Domain.Interfaces;
 using WhatCanICook.Domain.Models;
 
@@ -16,7 +18,13 @@ public class RecipeService : IRecipeService {
     }
 
     public async Task CreateAsync(RecipeDTO recipe) {
-        //validar aqui
+        RecipeValidator validator = new RecipeValidator();
+        var valResult = await validator.ValidateAsync(recipe);
+
+        //if not valid
+        if (!valResult.IsValid) {
+            throw new BadRequestException("New Recipe is invalid.", valResult);
+        }
 
         var newRecipe = _mapper.Map<Recipe>(recipe);
         await _repository.CreateAsync(newRecipe);
@@ -32,6 +40,20 @@ public class RecipeService : IRecipeService {
     }
 
     public async Task UpdateAsync(RecipeDTO recipe) {
+        var existingRecipe = await _repository.GetByIdAsync(recipe.Id);
+
+        if (existingRecipe == null) {
+            throw new NotFoundException($"Recipe with id {recipe.Id} has not been found.");
+        }
+
+        RecipeValidator validator = new RecipeValidator();
+        var valResult = await validator.ValidateAsync(recipe);
+
+        //if not valid
+        if (!valResult.IsValid) {
+            throw new BadRequestException("New Recipe is invalid.", valResult);
+        }
+
         var newRecipe = _mapper.Map<Recipe>(recipe);
         await _repository.UpdateAsync(newRecipe);
     }
