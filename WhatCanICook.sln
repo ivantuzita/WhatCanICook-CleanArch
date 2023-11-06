@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatCanICook.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatCanICook.Domain", "src\WhatCanICook.Domain\WhatCanICook.Domain.csproj", "{49B261CC-83D1-44F9-9B85-44A40BC235E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatCanICook.Persistence", "WhatCanICook.Persistence\WhatCanICook.Persistence.csproj", "{ACE4D4DD-BBCF-4B56-B5F1-A8301BF8FFEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{49B261CC-83D1-44F9-9B85-44A40BC235E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49B261CC-83D1-44F9-9B85-44A40BC235E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49B261CC-83D1-44F9-9B85-44A40BC235E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACE4D4DD-BBCF-4B56-B5F1-A8301BF8FFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACE4D4DD-BBCF-4B56-B5F1-A8301BF8FFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACE4D4DD-BBCF-4B56-B5F1-A8301BF8FFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACE4D4DD-BBCF-4B56-B5F1-A8301BF8FFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +48,7 @@ Global
 		{0E741868-6ED5-4A50-9706-4815A9E22F49} = {DC0F2EB9-CAAA-4872-A178-E31742A51A42}
 		{4243CC82-2A9B-419F-8251-4C7A1A2BD23B} = {6637FC54-A10E-44E9-BAA9-C548E632515E}
 		{49B261CC-83D1-44F9-9B85-44A40BC235E5} = {6637FC54-A10E-44E9-BAA9-C548E632515E}
+		{ACE4D4DD-BBCF-4B56-B5F1-A8301BF8FFEC} = {0E741868-6ED5-4A50-9706-4815A9E22F49}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {044134A9-4BD3-4260-A481-594BBA3A7BDD}
