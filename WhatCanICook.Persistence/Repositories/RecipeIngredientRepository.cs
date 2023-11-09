@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using WhatCanICook.Domain.Interfaces;
 using WhatCanICook.Domain.Models;
 using WhatCanICook.Persistence.DatabaseContext;
@@ -6,31 +7,44 @@ namespace WhatCanICook.Persistence.Repositories
 {
     public class RecipeIngredientRepository : GenericRepository<RecipeIngredient>, IRecipeIngredientRepository
     {
-        protected readonly CookDatabaseContext _context;
+        private readonly CookDatabaseContext _context;
 
         public RecipeIngredientRepository(CookDatabaseContext context): base(context)
         {
             _context = context;
         }
 
-        public Task AddIngredientToRecipe(int ingredientId, int recipeId, int quantity)
+        public async Task AddIngredientToRecipe(int ingredientId, int recipeId, int quantity)
         {
-            throw new NotImplementedException();
+            var obj = new RecipeIngredient {IngredientId = ingredientId, RecipeId = recipeId, Quantity = quantity};
+            await _context.AddAsync(obj);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<int> GetIngredientQuantity(int ingredientId)
+        public async Task<int> GetIngredientQuantity(int ingredientId)
         {
-            throw new NotImplementedException();
+            var obj = await _context.RecipeIngredients.FindAsync(ingredientId);
+            return obj.Quantity;
         }
 
-        public Task<List<Ingredient>> GetIngredientsByRecipe(int recipeId)
+        public async Task<List<Ingredient>> GetIngredientsByRecipe(int recipeId)
         {
-            throw new NotImplementedException();
+            //gets all recipeIngredients objects with id {recipeId} (gets all ingredientIds from RecipeId)
+            var recipeIngs = await _context.RecipeIngredients.Where(q => q.RecipeId == recipeId).ToListAsync();
+            //searches in ingredients table all Ingredient objects with same Id as recipeIngs list
+            var result = await _context.Ingredients.Where(q => recipeIngs.Any(r => q.Id == r.IngredientId)).ToListAsync();
+            return result;
         }
 
-        public Task RemoveIngredientFromRecipe(int ingredientId, int recipeId)
+        public async Task RemoveIngredientFromRecipe(int ingredientId, int recipeId)
         {
-            throw new NotImplementedException();
+            var obj = await _context.RecipeIngredients.Where(q => q.IngredientId == ingredientId
+            && q.RecipeId == recipeId).FirstOrDefaultAsync();
+
+            if (obj != null) {
+                _context.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
