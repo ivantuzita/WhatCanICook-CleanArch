@@ -1,4 +1,7 @@
-﻿namespace WhatCanICook.Domain.Models; 
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace WhatCanICook.Domain.Models;
+[Keyless]
 public class RecipeIngredient
 {
     public int RecipeId { get; set; }
