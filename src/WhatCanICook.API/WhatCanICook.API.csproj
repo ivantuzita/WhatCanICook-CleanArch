@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\WhatCanICook.Application\WhatCanICook.Application.csproj" />
+    <ProjectReference Include="..\WhatCanICook.Application\WhatCanICook.Application.csproj" />
+    <ProjectReference Include="..\WhatCanICook.Domain\WhatCanICook.Domain.csproj" />
     <ProjectReference Include="..\WhatCanICook.Persistence\WhatCanICook.Persistence.csproj" />
   </ItemGroup>
 

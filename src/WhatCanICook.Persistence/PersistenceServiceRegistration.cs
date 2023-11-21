@@ -9,7 +9,8 @@ namespace WhatCanICook.Persistence;
 public static class PersistenceServiceRegistration {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration) {
         services.AddDbContext<CookDatabaseContext>(options => {
-            options.UseSqlServer(configuration.GetConnectionString("DatabaseConnectionString"));
+            options.UseMySql(configuration.GetConnectionString("DatabaseConnectionString"), ServerVersion.AutoDetect(
+                configuration.GetConnectionString("DatabaseConnectionString")));
             });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

@@ -1,10 +1,14 @@
 using WhatCanICook.Persistence;
+using WhatCanICook.Application;
+using WhatCanICook.Domain.Interfaces;
+using WhatCanICook.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddControllers();
+builder.Services.AddApplicationServices();
+builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddCors(options => {
     options.AddPolicy("all", builder => builder.
     AllowAnyOrigin().
