@@ -1,7 +1,6 @@
 using WhatCanICook.Persistence;
 using WhatCanICook.Application;
-using WhatCanICook.Domain.Interfaces;
-using WhatCanICook.Persistence.Repositories;
+using WhatCanICook.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
