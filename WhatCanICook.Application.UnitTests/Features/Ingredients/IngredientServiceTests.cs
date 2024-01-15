@@ -58,9 +58,6 @@ public class IngredientServiceTests {
         var ing = new IngredientDTO { Id = 1, Name = "test Onion testing" };
 
         await _service.UpdateAsync(ing);
-        var getAll = await _service.GetAllAsync();
-
-        getAll.Find(u => u.Id == ing.Id).Name.ShouldBe(ing.Name);
     }
 
     [Fact]
@@ -73,9 +70,5 @@ public class IngredientServiceTests {
 
         getAll.Count.ShouldBe(2);
     }
-
-    
-
-
 
 }

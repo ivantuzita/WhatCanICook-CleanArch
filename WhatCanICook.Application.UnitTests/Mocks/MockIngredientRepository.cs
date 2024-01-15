@@ -1,4 +1,5 @@
 ﻿using Moq;
+using System.Net.NetworkInformation;
 using WhatCanICook.Domain.Interfaces;
 using WhatCanICook.Domain.Models;
 
@@ -50,6 +51,11 @@ public class MockIngredientRepository {
                 }
                 //is this correct?
                 return Task.FromResult(false);
+            });
+
+        mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((int id) => {
+                return ingredients.Find(u => u.Id == id);
             });
 
         mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Ingredient>()))
