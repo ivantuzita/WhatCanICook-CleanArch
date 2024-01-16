@@ -31,7 +31,7 @@ public class RecipeService : IRecipeService {
     }
 
     public async Task DeleteByIdAsync(int id) {
-        await DeleteByIdAsync(id);
+        await _repository.DeleteByIdAsync(id);
     }
 
     public async Task<bool> ExistsById(int id) {

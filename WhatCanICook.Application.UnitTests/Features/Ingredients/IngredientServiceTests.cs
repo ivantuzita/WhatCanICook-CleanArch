@@ -8,7 +8,6 @@ using WhatCanICook.Application.UnitTests.Mocks;
 using WhatCanICook.Domain.Interfaces;
 using WhatCanICook.Domain.Models;
 
-
 namespace WhatCanICook.Application.UnitTests.Features.Ingredients; 
 public class IngredientServiceTests {
 
@@ -55,7 +54,7 @@ public class IngredientServiceTests {
     [Fact]
     public async Task UpdateAsyncTest() {
         var _service = new IngredientService(_mockRepo.Object, _mapper);
-        var ing = new IngredientDTO { Id = 1, Name = "test Onion testing" };
+        var ing = new IngredientDTO { Id = 1, Name = "test Onion testing"};
 
         await _service.UpdateAsync(ing);
     }

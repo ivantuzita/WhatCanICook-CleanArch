@@ -1,5 +1,4 @@
 ﻿using Moq;
-using System.Net.NetworkInformation;
 using WhatCanICook.Domain.Interfaces;
 using WhatCanICook.Domain.Models;
 
@@ -32,13 +31,13 @@ public class MockIngredientRepository {
             });
 
         mockRepo.Setup(r => r.ExistsById(It.IsAny<int>()))
-            .ReturnsAsync((int id) => {
+            .Returns((int id) => {
                 var obj = ingredients.Any(u => u.Id == id);
 
                 if (obj == true) {
-                    return true;
+                    return Task.FromResult(true);
                 }
-                return false;
+                return Task.FromResult(false);
             });
 
         mockRepo.Setup(r => r.DeleteByIdAsync(It.IsAny<int>()))
@@ -54,8 +53,8 @@ public class MockIngredientRepository {
             });
 
         mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync((int id) => {
-                return ingredients.Find(u => u.Id == id);
+            .Returns((int id) => {
+                return Task.FromResult(ingredients.Find(u => u.Id == id));
             });
 
         mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Ingredient>()))
@@ -68,7 +67,6 @@ public class MockIngredientRepository {
                 //is this correct?
                 return Task.FromResult(false);
             });
-
 
         return mockRepo;
     }
