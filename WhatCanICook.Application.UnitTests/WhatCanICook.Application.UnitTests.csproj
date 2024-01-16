@@ -30,8 +30,4 @@
     <ProjectReference Include="..\src\WhatCanICook.Domain\WhatCanICook.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\RecipeIngredients\" />
-  </ItemGroup>
-
 </Project>

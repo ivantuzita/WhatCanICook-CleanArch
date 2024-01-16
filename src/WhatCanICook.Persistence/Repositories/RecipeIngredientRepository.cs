@@ -5,11 +5,11 @@ using WhatCanICook.Persistence.DatabaseContext;
 
 namespace WhatCanICook.Persistence.Repositories
 {
-    public class RecipeIngredientRepository : GenericRepository<RecipeIngredient>, IRecipeIngredientRepository
+    public class RecipeIngredientRepository : RecipeIngredient, IRecipeIngredientRepository
     {
         private readonly CookDatabaseContext _context;
 
-        public RecipeIngredientRepository(CookDatabaseContext context): base(context)
+        public RecipeIngredientRepository(CookDatabaseContext context)
         {
             _context = context;
         }
@@ -31,7 +31,7 @@ namespace WhatCanICook.Persistence.Repositories
         {
             //gets all recipeIngredients objects with id {recipeId} (gets all ingredientIds from RecipeId)
             var recipeIngs = await _context.RecipeIngredients.Where(q => q.RecipeId == recipeId).ToListAsync();
-            //searches in ingredients table all Ingredient objects with same Id as recipeIngs list
+            //searches in ingredients table for all Ingredient objects with same Id as recipeIngs list
             var result = await _context.Ingredients.Where(q => recipeIngs.Any(r => q.Id == r.IngredientId)).ToListAsync();
             return result;
         }
