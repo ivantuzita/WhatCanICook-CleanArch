@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using System.Reflection;
 using WhatCanICook.BlazorUI;
 using WhatCanICook.BlazorUI.Contracts;
 using WhatCanICook.BlazorUI.Services;
@@ -17,5 +18,7 @@ builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = n
 builder.Services.AddScoped<IIngredientService, IngredientService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IRecipeIngredientService, RecipeIngredientService>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 await builder.Build().RunAsync();
